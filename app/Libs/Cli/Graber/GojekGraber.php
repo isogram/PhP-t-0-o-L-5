@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Libs\Graber;
+namespace App\Libs\Cli\Graber;
 
 use DB;
 use GuzzleHttp\Client as HttpClient;

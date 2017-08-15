@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
-use App\Libs\Graber\GojekGraber as Gojek;
-use App\Libs\Graber\GojekNotifier;
+use App\Libs\Cli\Graber\GojekGraber as Gojek;
+use App\Libs\Cli\Graber\GojekNotifier;
 
 class GojekGraber extends Command {
 
