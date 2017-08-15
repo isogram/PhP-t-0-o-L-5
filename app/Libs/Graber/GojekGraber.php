@@ -10,7 +10,7 @@ class GojekGraber
 
     protected $mongodb;
 
-    const PER_PAGE = 1;
+    const PER_PAGE = 50;
     const GOJEK_MERCHANT_API = 'https://api.gojek.co.id/gojek/merchant/find';
 
     function __construct()
