@@ -77,12 +77,43 @@ class GojekGraber
 
             echo str_pad(" $value[sub_district_name], $value[district_name], $value[city_name] ", 100, "=", STR_PAD_BOTH) . "\n";
             $time1 = microtime(true);
-            
+
             // set location to processing (checking)
             $this->mongodb->collection('locations_to_check')->where('sub_district_id', $value['sub_district_id'])->update(['checked' => 1]);
 
             // S: process fetch gojek data
-            $this->getGojekData($value['latlng']);
+            if ($value['latlng']) {
+                $this->getGojekData($value['latlng']);
+            } else {
+                echo "SKIPPED\n";
+            }
+
+            // set location to processed (checking)
+            $this->mongodb->collection('locations_to_check')->where('sub_district_id', $value['sub_district_id'])->update(['checked' => 2]);
+            $time2 = microtime(true);
+
+            echo 'Total execution time: ' . ($time2 - $time1) . "\n";
+        }
+    }
+
+    public function recheck()
+    {
+        $data = $this->getData(1);
+
+        foreach ($data as $key => $value) {
+
+            echo str_pad(" $value[sub_district_name], $value[district_name], $value[city_name] ", 100, "=", STR_PAD_BOTH) . "\n";
+            $time1 = microtime(true);
+
+            // set location to processing (checking)
+            $this->mongodb->collection('locations_to_check')->where('sub_district_id', $value['sub_district_id'])->update(['checked' => 1]);
+
+            // S: process fetch gojek data
+            if ($value['latlng']) {
+                $this->getGojekData($value['latlng']);
+            } else {
+                echo "SKIPPED\n";
+            }
 
             // set location to processed (checking)
             $this->mongodb->collection('locations_to_check')->where('sub_district_id', $value['sub_district_id'])->update(['checked' => 2]);

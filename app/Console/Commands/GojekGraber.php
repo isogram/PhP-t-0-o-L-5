@@ -42,6 +42,13 @@ class GojekGraber extends Command {
                 $notifier->sendNotification();
 
                 break;
+
+            case 'recheck':
+
+                $notifier = new Gojek;
+                $notifier->recheck();
+
+                break;
             
             default:
 
